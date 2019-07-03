@@ -1,5 +1,6 @@
+//Got 12/15 on the Online Grade due to inefficency 
+
 import java.util.*;
-import java.io.*;
 
 public class Jerseys {
     private static boolean smaller(String shirtIn, String next){
@@ -29,8 +30,6 @@ public class Jerseys {
             int numJerseys = Integer.parseInt(in.nextLine());
             int numAthletes = Integer.parseInt(in.nextLine());
             HashMap<Integer, String> record = new HashMap<>();
-
-
 
             String[] sizes = new String[numJerseys];
             ArrayList<String> requests = new ArrayList<>();
