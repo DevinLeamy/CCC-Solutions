@@ -2,7 +2,7 @@
 
 A Collection of Unoffical CCC solutions from Various Years of the Competition (Listed Score are only for the years of the Competition still listed under Waterloo's Online Grader)
 
- # CCC 2010:
+ # CCC 2010
  
   Junior 1: (15/15)     Senior 1: (15/15)
   
@@ -14,7 +14,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (15/15)     Senior 5: Null
   
- # CCC 2011:
+ # CCC 2011
  
   Junior 1: (15/15)     Senior 1: (15/15)
   
@@ -26,7 +26,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (15/15)     Senior 5: Null
 
- # CCC 2012:
+ # CCC 2012
  
   Junior 1: (0/15)      Senior 1: (15/15)
   
@@ -38,7 +38,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (9/15)      Senior 5: (15/15)
   
- # CCC 2013:
+ # CCC 2013
  
   Junior 1: (15/15)     Senior 1: (15/15) 
   
@@ -50,7 +50,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: Null        Senior 5: Null
   
- # CCC 2014:
+ # CCC 2014
  
   Junior 1: (15/15)     Senior 1: (15/15) 
   
@@ -62,7 +62,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (15/15)     Senior 5: Null
   
- # CCC 2015:
+ # CCC 2015
  
   Junior 1: (15/15)     Senior 1: (15/15) 
   
@@ -74,7 +74,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (13/15)     Senior 5: Null
   
- # CCC 2016:
+ # CCC 2016
  
   Junior 1: (15/15)     Senior 1: Null
   
@@ -86,7 +86,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (15/15)     Senior 5: Null
   
- # CCC 2019:
+ # CCC 2019
  
   Junior 1: Null        Senior 1: (15/15) 
   
