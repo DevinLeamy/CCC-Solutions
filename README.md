@@ -36,7 +36,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 4: (15/15)     Senior 4: (9/15)
   
-  Junior 5: (9/15)      Senior 5: (15/15)
+  Junior 5: (15/15)      Senior 5: (15/15)
   
  # CCC 2013
  
