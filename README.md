@@ -90,10 +90,10 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
  
   Junior 1: Null        Senior 1: (15/15) 
   
-  Junior 2: Null        Senior 2:
+  Junior 2: Null        Senior 2: Null
   
-  Junior 3: Null        Senior 3:
+  Junior 3: Null        Senior 3: Null
   
-  Junior 4: (15/15)     Senior 4:
+  Junior 4: (15/15)     Senior 4: Null
   
-  Junior 5: (7/15)      Senior 5:  
+  Junior 5: (7/15)      Senior 5: Null
