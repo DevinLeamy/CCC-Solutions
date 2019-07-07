@@ -1,3 +1,5 @@
+//I Did Not Independently Come Up with the Idea of using a TreeSet
+
 import java.util.*;
 
 public class Gates {
