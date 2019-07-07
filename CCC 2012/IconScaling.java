@@ -5,12 +5,12 @@ public class IconScaling {
         Scanner in = new Scanner(System.in);
         int scale = Integer.parseInt(in.nextLine());
         String star = "*";
-        String x = "X";
+        String x = "x";
         String none = " ";
 
         for (int i = 0; i < scale - 1; i++){
             star += "*";
-            x += "X";
+            x += "x";
             none += " ";
         }
         for (int i = 0; i < scale; i++){
