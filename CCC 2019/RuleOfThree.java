@@ -1,3 +1,5 @@
+// 14/15 on the Online Grader, Cannot Pass S=15
+
 import java.util.*;
 
 public class RuleOfThree {
