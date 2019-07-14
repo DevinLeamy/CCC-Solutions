@@ -3,7 +3,6 @@
 import java.util.*;
 
 public class RuleOfThree {
-    private static boolean found = false;
     private static String getNewString(String original, int startIndex, int endIndex, String changeTo){
         return original.substring(0, startIndex) +  changeTo + original.substring(endIndex);
     }
@@ -36,13 +35,12 @@ public class RuleOfThree {
     }
     private static void findSolution(String[] ruleOne, String[] ruleTwo, String[] ruleThree,
                                      String current, String desired, int movesTaken, int movesAllowed, String[] solution, ArrayList<String> visited){
-        if (found){ return; }
         if (movesTaken == movesAllowed){
             if (current.equals(desired)){
                 for (String move: solution){
                     System.out.println(move);
                 }
-                found = true;
+                System.exit(0);
             }
             return;
         }
@@ -71,4 +69,5 @@ public class RuleOfThree {
         findSolution(ruleOne, ruleTwo, ruleThree, values[1], values[2], 0, Integer.parseInt(values[0]), solution, visited);
     }
 }
+
 
