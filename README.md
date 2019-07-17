@@ -8,7 +8,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 2: (15/15)     Senior 2: (15/15)
   
-  Junior 3: (15/15)     Senior 3: Null
+  Junior 3: (15/15)     Senior 3: (15/15)
   
   Junior 4: (15/15)     Senior 4: Null
   
