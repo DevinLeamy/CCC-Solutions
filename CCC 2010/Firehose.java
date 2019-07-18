@@ -66,21 +66,7 @@ public class Firehose{
         }
         return -1;
     }
-
-
-
-   /*
-   Starting from the first house check what houses are covered by the current diameter, then go to the
-   next house that is not covered and do the same with a given diameter. If the number of hoses required to
-   cover all the houses is greater then the number of hoses, the hose size must be increased. Otherwise,
-   decrease the size of the hose in tell it doesn't work with the given number of hoses. Print the radius of the
-   working hose.
-
-    */
-
-
-
-    private static int CIRCUMFERENCE = 1000000;
+ private static int CIRCUMFERENCE = 1000000;
     static class FastReader{
         BufferedReader br;
         public FastReader(){
