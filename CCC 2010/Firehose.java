@@ -66,7 +66,7 @@ public class Firehose{
         }
         return -1;
     }
- private static int CIRCUMFERENCE = 1000000;
+ private static final int CIRCUMFERENCE = 1000000;
     static class FastReader{
         BufferedReader br;
         public FastReader(){
