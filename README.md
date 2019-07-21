@@ -76,7 +76,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
  # CCC 2016
  
-  Junior 1: (15/15)     Senior 1: Null
+  Junior 1: (15/15)     Senior 1: (15/15)
   
   Junior 2: (15/15)     Senior 2: (15/15)
   
