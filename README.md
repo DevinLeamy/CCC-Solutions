@@ -48,7 +48,7 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 4: (15/15)     Senior 4: Null
   
-  Junior 5: Null        Senior 5: Null
+  Junior 5: (15/15)        Senior 5: Null
   
  # CCC 2014
  
