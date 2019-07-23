@@ -1,8 +1,7 @@
-//Due to efficientcy this receives 8/15 on the online grader
+//Due to efficientcy this receives 9/15 on the online grader
 
 import java.io.*;
 import java.util.*;
-
 
 public class ConvexHull {
     static class FastReader{
@@ -64,9 +63,9 @@ public class ConvexHull {
             return;
         }
         String[] currentTandH = islands.get(current).split(" ");
-        if (time <= Integer.parseInt(currentTandH[0]) && hull >= Integer.parseInt(currentTandH[1])){
+        if (time <= Integer.parseInt(currentTandH[0]) && hull >= Integer.parseInt(currentTandH[1])) {
             islands.replace(current, time + " " + hull);
-        } else if (time > Integer.parseInt(currentTandH[0])){
+        } else if (time > Integer.parseInt(currentTandH[0]) && hull < Integer.parseInt(currentTandH[1])){
             return;
         }
         traveled.add(current);
@@ -82,12 +81,11 @@ public class ConvexHull {
                 findShortest(move[0], move[1], routes, traveled, destination, move[2]);
             }
         }
-        traveled = new ArrayList<>();
-        traveled.addAll(hold);
-        traveled.add(current);
     }
     public static void main(String[] args){
         initializeIslands();
+
+        //Sort routes by T first and then H or vice versa
         ArrayList<Integer> findIndex = new ArrayList<>();
         ArrayList<int[]> keys = new ArrayList<>();
         ArrayList<int[]> values = new ArrayList<>();
@@ -105,10 +103,29 @@ public class ConvexHull {
             keys.add(findIndex.indexOf(T), putKey);
             values.add(putValue);
         }
-        HashMap<int[], int[]> routes = new HashMap<>();
-
+        ArrayList<int[]> reSortKeys = new ArrayList<>();
+        ArrayList<Integer> temp = new ArrayList<>();
+        int current = values.get(keys.get(0)[0])[0];
+        int index = 0;
         for (int i = 0; i < keys.size(); i++){
             int[] key = keys.get(i);
+            int[] value = values.get(key[0]);
+            if (value[0] == current){
+                temp.add(value[1]);
+                Collections.sort(temp);
+                reSortKeys.add(index + temp.indexOf(value[1]), key);
+            } else {
+                index = i;
+                current = value[0];
+                temp = new ArrayList<>();
+                temp.add(value[1]);
+                reSortKeys.add(index + temp.indexOf(value[1]), key);
+            }
+
+        }
+        HashMap<int[], int[]> routes = new HashMap<>();
+        for (int i = 0; i < keys.size(); i++){
+            int[] key = reSortKeys.get(i);
             int[] value = values.get(key[0]);
             int[] newKey = new int[] {key[1], key[2]};
             routes.put(newKey, value);
@@ -118,6 +135,7 @@ public class ConvexHull {
         int B = Integer.parseInt(lastLine.nextToken());
 
         findShortest(A, 0, routes, new ArrayList<>(), B, K);
+
         System.out.println(
                 (shortest == 1000000000)? -1: shortest
         );
