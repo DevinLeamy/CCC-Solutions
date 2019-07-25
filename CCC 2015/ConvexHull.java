@@ -32,7 +32,7 @@ public class ConvexHullV2 {
         }
         return minIndex;
     }
-    private static void findShortest(ArrayList<int[]> routes, int[] timeKeys, int[] hullKeys, int[] parentNodes, boolean[] added, int destination){
+    private static void findShortest(ArrayList<int[]> routes, int[] timeKeys, int[] hullKeys, boolean[] added, int destination){
         for (int counter = 0; counter < N; counter++){
             int u = getMin(timeKeys, hullKeys, added);
             if (u == -1){
@@ -44,9 +44,6 @@ public class ConvexHullV2 {
                 System.out.println(timeKeys[u]);
                 System.exit(0);
             }
-            if (counter == (N-1)){
-                System.out.println(-1);
-            }
             int currentT = timeKeys[u];
             int currentH = hullKeys[u];
             for (int[] route: routes){
@@ -56,13 +53,11 @@ public class ConvexHullV2 {
                 int B = route[1];
                 if (A == u && !added[B]){
                     if (newTime < timeKeys[B] && newHull > 0){
-                        parentNodes[B] = u;
                         hullKeys[B] = newHull;
                         timeKeys[B] = newTime;
                     }
                 } else if (B == u && !added[A]){
                     if (newTime < timeKeys[A] && newHull > 0){
-                        parentNodes[A] = u;
                         hullKeys[A] = newHull;
                         timeKeys[A] = newTime;
                     }
@@ -90,7 +85,6 @@ public class ConvexHullV2 {
         int start = Integer.parseInt(lastLine.nextToken()) - 1;
         int destination = Integer.parseInt(lastLine.nextToken()) - 1;
 
-        int[] parentNodes = new int[N];
         int[] timeKeys = new int[N];
         int[] hullKeys = new int[N];
         boolean[] added = new boolean[N];
@@ -100,9 +94,8 @@ public class ConvexHullV2 {
             hullKeys[i] = Integer.MIN_VALUE;
             added[i] = false;
         }
-        parentNodes[start] = -1;
         timeKeys[start] = 0;
         hullKeys[start] = K;
-        findShortest(routes, timeKeys, hullKeys, parentNodes, added, destination);
+        findShortest(routes, timeKeys, hullKeys, added, destination);
     }
 }
