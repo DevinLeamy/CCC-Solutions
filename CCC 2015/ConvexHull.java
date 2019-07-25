@@ -1,143 +1,108 @@
-//Due to efficientcy this receives 9/15 on the online grader
+//Receives 13/15 on the Online Grader due to incorrect answers
 
 import java.io.*;
 import java.util.*;
 
-public class ConvexHull {
+public class ConvexHullV2 {
     static class FastReader{
         BufferedReader br;
         FastReader()
         {
             br = new BufferedReader(new InputStreamReader(System.in));
         }
-        String nextLine()
+        String nextLine() throws IOException
         {
-            String str = "";
-            try {
-                str = br.readLine();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-            return str;
+            return br.readLine();
         }
     }
-    private static final FastReader in = new FastReader();
-    private static final StringTokenizer lineOne = new StringTokenizer(in.nextLine());
-    private static final int K = Integer.parseInt(lineOne.nextToken()); //Size of the hull
-    private static final int N = Integer.parseInt(lineOne.nextToken()); //Number of islands
-    private static final int M = Integer.parseInt(lineOne.nextToken()); //Number of sea routes
-    private static HashMap<Integer, String> islands = new HashMap<>();
-    private static void initializeIslands(){
-        for (int i = 1; i <= N; i++){
-            islands.put(i, 1000000 + " " + -1);
-        }
-    }
-    private static int shortest = 1000000000;
-    private static ArrayList<int[]> getMoves(int current, int hull, HashMap<int[], int[]> routes, int time){
-        ArrayList<int[]> moves = new ArrayList<>();
-        ArrayList<int[]> keys = new ArrayList<>(routes.keySet());
-        for (int i = 0; i < routes.size(); i++){
-            int[] key = keys.get(i);
-            int[] TandH = routes.get(keys.get(i));
-            int H = TandH[1];
-            if (key[0] == current){
-                if ((hull - H) > 0){
-                    moves.add(new int[] {key[1], (time + TandH[0]), (hull - H) });
-                }
-            } else if (key[1] == current){
-                if ((hull - H) > 0){
-                    moves.add(new int[] {key[0], (time + TandH[0]), (hull - H)});
+    private static int K;
+    private static int M;
+    private static int N;
+    private static int getMin(int[] timeKeys, int[] hullKeys, boolean[] added){
+        int min = Integer.MAX_VALUE;
+        int minIndex = -1;
+        for (int i = 0; i < N; i++) {
+            if (!added[i]) {
+                int key = timeKeys[i];
+                if (key < min && hullKeys[i] > 0) {
+                    min = key;
+                    minIndex = i;
                 }
             }
         }
-        return moves;
+        return minIndex;
     }
-    private static void findShortest(int current, int time, HashMap<int[], int[]> routes, ArrayList<Integer> traveled, int destination, int hull){
-        if (time > shortest){
-            return;
-        }
-        if (current == destination){
-            if (time < shortest){
-                shortest = time;
+    private static void findShortest(ArrayList<int[]> routes, int[] timeKeys, int[] hullKeys, int[] parentNodes, boolean[] added, int destination){
+        for (int counter = 0; counter < N; counter++){
+            int u = getMin(timeKeys, hullKeys, added);
+            if (u == -1){
+                System.out.println(-1);
+                System.exit(0);
             }
-            return;
-        }
-        String[] currentTandH = islands.get(current).split(" ");
-        if (time <= Integer.parseInt(currentTandH[0]) && hull >= Integer.parseInt(currentTandH[1])) {
-            islands.replace(current, time + " " + hull);
-        } else if (time > Integer.parseInt(currentTandH[0]) && hull < Integer.parseInt(currentTandH[1])){
-            return;
-        }
-        traveled.add(current);
-        ArrayList<Integer> hold = new ArrayList<>(traveled);
-        ArrayList<int[]> moves = getMoves(current, hull, routes, time);
-        if (moves.size() == 0){
-            return;
-        }
-        for (int[] move: moves){
-            traveled = new ArrayList<>();
-            traveled.addAll(hold);
-            if (!traveled.contains(move[0])) {
-                findShortest(move[0], move[1], routes, traveled, destination, move[2]);
+            added[u] = true;
+            if (u == destination){
+                System.out.println(timeKeys[u]);
+                System.exit(0);
+            }
+            if (counter == (N-1)){
+                System.out.println(-1);
+            }
+            int currentT = timeKeys[u];
+            int currentH = hullKeys[u];
+            for (int[] route: routes){
+                int newTime = route[2] + currentT;
+                int newHull = currentH - route[3];
+                int A = route[0];
+                int B = route[1];
+                if (A == u && !added[B]){
+                    if (newTime < timeKeys[B] && newHull > 0){
+                        parentNodes[B] = u;
+                        hullKeys[B] = newHull;
+                        timeKeys[B] = newTime;
+                    }
+                } else if (B == u && !added[A]){
+                    if (newTime < timeKeys[A] && newHull > 0){
+                        parentNodes[A] = u;
+                        hullKeys[A] = newHull;
+                        timeKeys[A] = newTime;
+                    }
+                }
             }
         }
     }
-    public static void main(String[] args){
-        initializeIslands();
+    public static void main(String[] args) throws IOException{
+        FastReader in = new FastReader();
+        StringTokenizer lineOne = new StringTokenizer(in.nextLine());
+        K = Integer.parseInt(lineOne.nextToken()); //Hull
+        N = Integer.parseInt(lineOne.nextToken()); //Islands
+        M = Integer.parseInt(lineOne.nextToken()); //Routes
 
-        //Sort routes by T first and then H or vice versa
-        ArrayList<Integer> findIndex = new ArrayList<>();
-        ArrayList<int[]> keys = new ArrayList<>();
-        ArrayList<int[]> values = new ArrayList<>();
+        ArrayList<int[]> routes = new ArrayList<>();
         for (int i = 0; i < M; i++){
             StringTokenizer line = new StringTokenizer(in.nextLine());
-            int A = Integer.parseInt(line.nextToken());
-            int B = Integer.parseInt(line.nextToken());
+            int A = Integer.parseInt(line.nextToken()) - 1;
+            int B = Integer.parseInt(line.nextToken()) - 1;
             int T = Integer.parseInt(line.nextToken()); //Time
-            int H = Integer.parseInt(line.nextToken()); //Wear on hull
-
-            findIndex.add(T);
-            Collections.sort(findIndex);
-            int[] putKey = {i, A, B};
-            int[] putValue = {T, H};
-            keys.add(findIndex.indexOf(T), putKey);
-            values.add(putValue);
-        }
-        ArrayList<int[]> reSortKeys = new ArrayList<>();
-        ArrayList<Integer> temp = new ArrayList<>();
-        int current = values.get(keys.get(0)[0])[0];
-        int index = 0;
-        for (int i = 0; i < keys.size(); i++){
-            int[] key = keys.get(i);
-            int[] value = values.get(key[0]);
-            if (value[0] == current){
-                temp.add(value[1]);
-                Collections.sort(temp);
-                reSortKeys.add(index + temp.indexOf(value[1]), key);
-            } else {
-                index = i;
-                current = value[0];
-                temp = new ArrayList<>();
-                temp.add(value[1]);
-                reSortKeys.add(index + temp.indexOf(value[1]), key);
-            }
-
-        }
-        HashMap<int[], int[]> routes = new HashMap<>();
-        for (int i = 0; i < keys.size(); i++){
-            int[] key = reSortKeys.get(i);
-            int[] value = values.get(key[0]);
-            int[] newKey = new int[] {key[1], key[2]};
-            routes.put(newKey, value);
+            int H = Integer.parseInt(line.nextToken()); //Hull
+            routes.add(new int[] {A, B, T, H});
         }
         StringTokenizer lastLine = new StringTokenizer(in.nextLine());
-        int A = Integer.parseInt(lastLine.nextToken());
-        int B = Integer.parseInt(lastLine.nextToken());
+        int start = Integer.parseInt(lastLine.nextToken()) - 1;
+        int destination = Integer.parseInt(lastLine.nextToken()) - 1;
 
-        findShortest(A, 0, routes, new ArrayList<>(), B, K);
+        int[] parentNodes = new int[N];
+        int[] timeKeys = new int[N];
+        int[] hullKeys = new int[N];
+        boolean[] added = new boolean[N];
 
-        System.out.println(
-                (shortest == 1000000000)? -1: shortest
-        );
+        for (int i = 0; i < N; i++){
+            timeKeys[i] = Integer.MAX_VALUE;
+            hullKeys[i] = Integer.MIN_VALUE;
+            added[i] = false;
+        }
+        parentNodes[start] = -1;
+        timeKeys[start] = 0;
+        hullKeys[start] = K;
+        findShortest(routes, timeKeys, hullKeys, parentNodes, added, destination);
     }
 }
