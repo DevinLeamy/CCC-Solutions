@@ -13,8 +13,7 @@ public class PrettyAveragePrimes {
     private static int[] findPrimes(int N){
         int[] output = new int[2];
         if (N % 2 == 0){
-            N--;
-            output[0] = N;
+            output[0] = (N-1);
             output[1] = N + 2;
         } else {
             output[0] = N;
