@@ -86,6 +86,18 @@ A Collection of Unoffical CCC solutions from Various Years of the Competition (L
   
   Junior 5: (15/15)     Senior 5: Null
   
+ # CCC 2018
+ 
+  Junior 1: Null        Senior 1: Null
+  
+  Junior 2: Null        Senior 2: Null
+  
+  Junior 3: Null        Senior 3: Null
+  
+  Junior 4: (15/15)     Senior 4: Null
+  
+  Junior 5: Null        Senior 5: Null
+  
  # CCC 2019
  
   Junior 1: (15/15)     Senior 1: (15/15) 
