@@ -1,6 +1,6 @@
 # CCC-Solutions
 
-A Collection of Unoffical CCC solutions from Various Years of the Competition (Listed Score are only for the years of the Competition still listed under Waterloo's Online Grader)
+A collection of unoffical CCC solutions from various years of the competition (listed scores are only for the years of the <br/> competition covered by the CCC online grader). 
 
  # CCC 2010
  
