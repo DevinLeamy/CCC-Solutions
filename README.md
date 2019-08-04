@@ -88,7 +88,7 @@ A collection of unoffical CCC solutions from various years of the competition (l
   
  # CCC 2018
  
-  Junior 1: (15/15)     Senior 1: Null
+  Junior 1: (15/15)     Senior 1: (15/15)
   
   Junior 2: (15/15)     Senior 2: (15/15)
   
