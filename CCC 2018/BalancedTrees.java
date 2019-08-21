@@ -1,31 +1,36 @@
-// 9/15 due to OutOfMemoryError
+// 9/15 due to Efficency
 
 import java.io.*;
+import java.util.*;
 
 public class BalancedTrees {
-    private static long getSubtrees(long N, long[] subtrees, long count){
+    private static long getSubtrees(long N, HashMap<Integer, Long> subtrees, long count){
         long hold = count;
         for (int i = (int) N; i >= 2; i--){
-            if (subtrees[(int) N / i] != 0){
-                count += subtrees[(int)N / i];
+            if (subtrees.containsKey((int) N/i)){
+                count += subtrees.get((int) N / i);
             } else {
                 count = getSubtrees(N / i, subtrees, count);
             }
         }
-        subtrees[(int) N] = count - hold;
+        subtrees.put((int) N, count - hold);
         return count;
     }
     private static long solve(long N) {
-        long[] subtrees = new long[(int) N+1];
+        HashMap<Integer, Long> subtrees = new HashMap<>();
+        if (N == 1)
+        {
+            return 1;
+        }
         try {
-            subtrees[1] = 1;
-            subtrees[2] = 1;
-            subtrees[3] = 2;
-            subtrees[4] = 3;
-            subtrees[5] = 4;
-            subtrees[6] = 6;
+            subtrees.put(1, 1L);
+            subtrees.put(2, 1L);
+            subtrees.put(3, 2L);
+            subtrees.put(4, 3L);
+            subtrees.put(5, 4L);
+            subtrees.put(6, 6L);
         } catch (ArrayIndexOutOfBoundsException aioobe){
-            return subtrees[(int) N];
+            return subtrees.get(N);
         }
         return getSubtrees(N, subtrees, 0);
     }
