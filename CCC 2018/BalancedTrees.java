@@ -22,16 +22,13 @@ public class BalancedTrees {
         {
             return 1;
         }
-        try {
-            subtrees.put(1, 1L);
-            subtrees.put(2, 1L);
-            subtrees.put(3, 2L);
-            subtrees.put(4, 3L);
-            subtrees.put(5, 4L);
-            subtrees.put(6, 6L);
-        } catch (ArrayIndexOutOfBoundsException aioobe){
-            return subtrees.get(N);
-        }
+        subtrees.put(1, 1L);
+        subtrees.put(2, 1L);
+        subtrees.put(3, 2L);
+        subtrees.put(4, 3L);
+        subtrees.put(5, 4L);
+        subtrees.put(6, 6L);
+        
         return getSubtrees(N, subtrees, 0);
     }
     public static void main(String[] args) throws IOException{
