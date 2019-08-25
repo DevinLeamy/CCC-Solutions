@@ -6,7 +6,7 @@ public class AnimalFarm {
     {
         int min = 5001;
         int FP = -1;
-        int[] indexandpsofe = new int[4];
+        int[] removeEdges = new int[4];
         for (int i = 0; i < added.length; i++)
         {
             if (added[i]) {
@@ -26,16 +26,15 @@ public class AnimalFarm {
                                     {
                                         min = zedge[2];
                                         FP = z;
-                                        indexandpsofe[0] = -1;
-                                        indexandpsofe[1] = z;
-                                        indexandpsofe[2] = -1;
-                                        indexandpsofe[3] = w;
+                                        removeEdges[0] = -1;
+                                        removeEdges[1] = z;
+                                        removeEdges[2] = -1;
+                                        removeEdges[3] = w;
                                     }
                                 }
                             }
                         }
                     }
-
                 } else
                 {
                     ArrayList<int[]> edges = pens.get(i);
@@ -49,10 +48,10 @@ public class AnimalFarm {
                             {
                                 min = edge[2];
                                 FP = i;
-                                indexandpsofe[1] = i;
-                                indexandpsofe[3] = j;
-                                indexandpsofe[0] = -1;
-                                indexandpsofe[2] = -1;
+                                removeEdges[1] = i;
+                                removeEdges[3] = j;
+                                removeEdges[0] = -1;
+                                removeEdges[2] = -1;
 
                             }
                         } else
@@ -71,10 +70,10 @@ public class AnimalFarm {
                                             {
                                                 min = zedge[2];
                                                 FP = z;
-                                                indexandpsofe[0] = w;
-                                                indexandpsofe[1] = i;
-                                                indexandpsofe[2] = z;
-                                                indexandpsofe[3] = j;
+                                                removeEdges[0] = w;
+                                                removeEdges[1] = i;
+                                                removeEdges[2] = z;
+                                                removeEdges[3] = j;
                                             }
                                         }
                                     }
@@ -85,9 +84,9 @@ public class AnimalFarm {
                 }
             }
         }
-        pens.get(indexandpsofe[1]).remove(indexandpsofe[3]);
+        pens.get(removeEdges[1]).remove(removeEdges[3]);
         try {
-            pens.get(indexandpsofe[2]).remove(indexandpsofe[0]);
+            pens.get(removeEdges[2]).remove(removeEdges[0]);
         } catch (IndexOutOfBoundsException aioobe)
         {
             added[added.length - 1] = true;
@@ -115,6 +114,7 @@ public class AnimalFarm {
         int M = Integer.parseInt(in.readLine());
         ArrayList< ArrayList<int[]> > pens = new ArrayList<>();
         ArrayList<String> allCorners = new ArrayList<>();
+
         for (int i = 0; i < M; i++)
         {
             ArrayList<int[]> edges = new ArrayList<>();
