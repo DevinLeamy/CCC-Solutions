@@ -1,147 +1,118 @@
-//Used Prim's algorithm. Passes 15/22 test cases
+//Used Prim's algorithm. Passes 16/22 test cases
 
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class MaximumStrategicSavings {
-    private static long[] findMin(boolean[][] added, long[][] keys)
+    private static long[] getMin(long[][] keys, boolean[][] added)
     {
-        long currentMin = Long.MAX_VALUE;
-        int[] addit = {-1, -1};
+        long min = Long.MAX_VALUE;
+        int[] add = {-1, -1};
         for (int i = 0; i < keys.length; i++)
         {
-            for (int j = 0; j < keys[0].length; j++)
+            for (int j= 0; j < keys[0].length; j++)
             {
                 if (!added[i][j])
                 {
-                    if (currentMin > keys[i][j])
+                    if (keys[i][j] < min)
                     {
-                        currentMin = keys[i][j];
-                        addit[0] = i;
-                        addit[1] = j;
+                        min = keys[i][j];
+                        add[0] = i;
+                        add[1] = j;
                     }
                 }
             }
         }
-        return new long[] {currentMin, addit[0], addit[1]};
+        return new long[] {min, add[0], add[1]};
     }
-    private static long solve(int N, int M, List<long[]>[] flights, List<long[]>[] portals)
+    public static void main(String[] args) throws IOException
     {
-        boolean[][] added = new boolean[N][M];
-        long totalCost = 0L;
-        long[][] keys = new long[N][M];
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer line = new StringTokenizer(in.readLine());
+        long N, M, P, Q, a, b, c, d, e, f;
+        N = Long.parseLong(line.nextToken());
+        M = Long.parseLong(line.nextToken());
+        P = Long.parseLong(line.nextToken());
+        Q = Long.parseLong(line.nextToken());
+        ArrayList< ArrayList< long[] > > adjp = new ArrayList<>();
+        ArrayList< ArrayList <long[] > > adjt = new ArrayList<>();
+
+        for (int i = 0; i < M; i++)
+        {
+            adjp.add(new ArrayList<>());
+        }
         for (int i = 0; i < N; i++)
         {
-            for (int j = 0; j < M; j++)
-            {
-                keys[i][j] = Long.MAX_VALUE;
-            }
+            adjt.add(new ArrayList<>());
         }
-        keys[0][0] = 0;
-        for (int i = 0; i < (N * M); i++)
-        {
-            long[] result = findMin(added, keys);
-            totalCost += result[0];
-            int P = (int) result[1];
-            int C = (int) result[2];
-
-            added[P][C] = true;
-            for (long[] flight: flights[C])
-            {
-                long C2 = flight[0];
-                long cost = flight[1];
-                if (!added[P][(int)C2])
-                {
-                    keys[P][(int) C2] = (keys[P][(int) C2] > cost)? cost : keys[P][(int) C2];
-                }
-            }
-            for (long[] portal: portals[P])
-            {
-                long P2 = portal[0];
-                long cost = portal[1];
-                if (!added[(int) P2][C])
-                {
-                    keys[(int) P2][C] = (keys[(int) P2][C] > cost) ? cost : keys[(int) P2][C];
-                }
-            }
-        }
-        return totalCost;
-    }
-    public static void main(String[] args) throws IOException{
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer lineOne = new StringTokenizer(in.readLine());
-        int N = Integer.parseInt(lineOne.nextToken());
-        int M = Integer.parseInt(lineOne.nextToken());
-        int P = Integer.parseInt(lineOne.nextToken());
-        int Q = Integer.parseInt(lineOne.nextToken());
-        List<long[]>[] flights = new ArrayList[M];
-        List<long[]>[] portals = new ArrayList[N];
-        Arrays.setAll(flights, ArrayList::new);
-        Arrays.setAll(portals, ArrayList::new);
-
-        HashMap<String, Long> planes = new HashMap<>();
-        HashMap<String, Long> teleporters = new HashMap<>();
         long totalCost = 0L;
-
-        //Flights travel between cities on the same planet
-        for (int i = 0; i < P; i++)
+        for (int i = 0 ;i < P; i++)
         {
-            long[] flight = Arrays.stream(in.readLine().split(" ")).mapToLong(Long::parseLong).toArray();
-            if (flight[0] != flight[1])
+            line = new StringTokenizer(in.readLine());
+            a = Long.parseLong(line.nextToken()) - 1;
+            b = Long.parseLong(line.nextToken()) - 1;
+            c = Long.parseLong(line.nextToken());
+            if (a != b)
             {
-                String pare = Long.max(flight[0], flight[1]) + " " + Long.min(flight[0], flight[1]);
-                if (planes.containsKey(pare))
-                {
-                    if (planes.get(pare) > flight[2])
-                    {
-                        planes.replace(pare, flight[2]);
-                    }
-                } else {
-                    planes.put(pare, flight[2]);
-                }
+                adjp.get((int) a).add(new long[]{b, c});
+                adjp.get((int) b).add(new long[]{a, c});
             }
-            totalCost += (flight[2] * N);
-        }
-        for (String key: planes.keySet())
-        {
-            String[] split = key.split(" ");
-            int C1 = Integer.parseInt(split[0]) - 1;
-            int C2 = Integer.parseInt(split[1]) - 1;
-            long cost = planes.get(key);
-            flights[C1].add(new long[] {C2, cost});
-            flights[C2].add(new long[] {C1, cost});
+            totalCost += c * N;
         }
 
-        //Portal travel between the same cities on different planets
+
+
         for (int i = 0; i < Q; i++)
         {
-            long[] portal = Arrays.stream(in.readLine().split(" ")).mapToLong(Long::parseLong).toArray();
-            if (portal[0] != portal[1])
+            line = new StringTokenizer(in.readLine());
+            d = Long.parseLong(line.nextToken()) - 1;
+            e = Long.parseLong(line.nextToken()) - 1;
+            f = Long.parseLong(line.nextToken());
+            if (d != e)
             {
-                String pare = Long.max(portal[0], portal[1]) + " " + Long.min(portal[0], portal[1]);
-                if (teleporters.containsKey(pare))
+                adjt.get((int) d).add(new long[]{e, f});
+                adjt.get((int) e).add(new long[]{d, f});
+            }
+            totalCost += f * M;
+        }
+        boolean[][] added = new boolean[(int)N][(int)M];
+        long[][] keys = new long[(int)N][(int)M];
+        for (int i = 0; i < N; i++)
+        {
+            Arrays.fill(keys[i], Long.MAX_VALUE);
+        }
+        keys[0][0] = 0L;
+        long bestCost = 0L;
+        for (int i = 0; i < M * N; i++)
+        {
+            long[] output = getMin(keys, added);
+            bestCost += output[0];
+            long C = output[2];
+            long S = output[1];
+            added[(int)S][(int)C] = true;
+            for (long[] other: adjp.get((int)C))
+            {
+                long P1 = other[0];
+                if (!added[(int)S][(int)P1])
                 {
-                    if (teleporters.get(pare) > portal[2])
+                    if (keys[(int)S][(int)P1] > other[1])
                     {
-                        teleporters.replace(pare, portal[2]);
+                        keys[(int)S][(int)P1] = other[1];
                     }
-                } else {
-                    teleporters.put(pare, portal[2]);
                 }
             }
-            totalCost += (portal[2] * M);
+            for (long[] other: adjt.get((int)S))
+            {
+                long P1 = other[0];
+                if (!added[(int)P1][(int)C])
+                {
+                    if (keys[(int)P1][(int)C] > other[1])
+                    {
+                        keys[(int)P1][(int)C] = other[1];
+                    }
+                }
+            }
         }
-        for (String key: teleporters.keySet())
-        {
-            String[] split = key.split(" ");
-            int P1 = Integer.parseInt(split[0]) - 1;
-            int P2 = Integer.parseInt(split[1]) - 1;
-            long cost = teleporters.get(key);
-            portals[P1].add(new long[] {P2, cost});
-            portals[P2].add(new long[] {P1, cost});
-        }
-
-        long mostEffective = solve(N, M, flights, portals);
-        System.out.print((totalCost - mostEffective));
+        System.out.println(totalCost - bestCost);
     }
 }
