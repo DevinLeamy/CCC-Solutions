@@ -1,4 +1,4 @@
-//Used Prim's algorithm. Passes 16/22 test cases
+//Uses Prim's Minimum Spanning Tree Algorithm. Passes 16/22 test cases
 
 import java.util.*;
 import java.io.*;
