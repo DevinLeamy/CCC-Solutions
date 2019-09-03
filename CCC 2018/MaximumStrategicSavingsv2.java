@@ -1,7 +1,9 @@
+//Uses Kruskal's Minimum Spanning Tree Algorithm
+
 import java.util.*;
 import java.io.*;
 
-public class MaximumStrategicSavingsv2 {
+public class MaximumStrategicSavingsV2 {
     static class DisjointSet
     {
         int[] depth, parent;
