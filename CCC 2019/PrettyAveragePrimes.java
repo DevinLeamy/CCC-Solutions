@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class PrettyAveragePrimes {
+public class Main {
     private static boolean isPrime(int N){
         int max = (int) Math.sqrt(N) + 1;
         for (int i = 2; i < max; i++){
@@ -13,7 +13,8 @@ public class PrettyAveragePrimes {
     private static int[] findPrimes(int N){
         int[] output = new int[2];
         if (N % 2 == 0){
-            output[0] = N - 1;
+            N--;
+            output[0] = N;
             output[1] = N + 2;
         } else {
             output[0] = N;
