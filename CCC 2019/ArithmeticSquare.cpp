@@ -64,7 +64,7 @@ bool recur(int row, int col, vector<vector<ll>> square) {
 	}
 	ll value = place(row, col, square);
 	if (value == bad) {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 			square[row][col] = i;
 			if (recur(row, col+1, square)) {
 				return true;
