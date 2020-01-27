@@ -1,61 +1,57 @@
 #include <iostream>
 #include <vector>
-#include <map>
-#include <unordered_map>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#include <set>
+#define INF 2147483647;
+#define LINF 9223372036854775807;
+#define PI pair<int, int>
+#define ll long long
+#define pb push_back
+#define loop(h) for(int i = 0; i < h; i++)
 
-#define intM map<int, int>
-#define intUM unordered_map<int, int>
 using namespace std;
 
-struct Coor
-{
-   int x, y1, y2, val;
-
-    bool operator < (const Coor &a) const {
-        return x < a.x;
-    }
-};
-int main()
-{
-   vector<Coor> events;
-   vector<int> yPoints;
-   long long costs[2010] = { 0 };
-   intUM compressed;
-   int N;
-   cin >> N;
-   int T, x1, x2, y1, y2, tint;
-   cin >> T;
-   for (int i = 0; i < N; i++)
-   {
-      cin >> x1 >> y1 >> x2 >> y2 >> tint;
-      events.push_back((Coor) {x1, y1, y2, tint});
-      events.push_back((Coor) {x2, y1, y2, -tint});
-      yPoints.push_back(y1);
-      yPoints.push_back(y2);
-   }
-
-   sort(yPoints.begin(), yPoints.end());
-   sort(events.begin(), events.end());
-   yPoints.erase(unique(yPoints.begin(), yPoints.end()), yPoints.end());
-   for (int i = 0; i < yPoints.size(); i++)
-   {
-      compressed[yPoints[i]] = i;
-   }
-   long long output = 0;
-   for (int i = 0; i < events.size(); i++)
-   {
-      for (int j = compressed[events[i].y1]; j < compressed[events[i].y2]; j++)
-      {
-         costs[j] += events[i].val;
-      }
-      for (int j = 0; j < yPoints.size(); j++)
-      {
-         if (costs[j] >= T)
-         {
-            output += (events[i+1].x - events[i].x) * (yPoints[j + 1] - yPoints[j]);
-         }
-      }
-   }
-   cout << area << endl;
-   return 0;
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	int n; ll T; ll count = 0; ll rt, rb, cl, cr, t;
+	vector<pair<ll, ll>> tintsX; vector<pair<ll, pair<ll, ll>>> tintY;
+	cin >> n >> T;
+	loop(n) {
+		cin >> cl >> rb >> cr >> rt >> t;
+		tintsX.pb({cl, i}); tintsX.pb({cr, i});
+		tintY.pb({rb, {t, i}}); tintY.pb({rt, {-t, i}});
+	}
+	sort(tintsX.begin(), tintsX.end());
+	sort(tintY.begin(), tintY.end());
+	vector<ll> ids;
+	for (int i = 0; i < tintsX.size()-1; i++) {
+		pair<ll, ll> val = tintsX[i];
+		ll x = val.first; ll id = val.second;
+		
+		if (find(ids.begin(), ids.end(), id) != ids.end()) {
+			ids.erase(find(ids.begin(), ids.end(), id));
+		} else {
+			ids.pb(id);
+		}
+		ll last = -1; ll currentTint = 0;
+		for (int j = 0; j < tintY.size(); j++) {
+			if (find(ids.begin(), ids.end(), tintY[j].second.second) != ids.end()) {
+				pair<ll, pair<ll, ll>> h = tintY[j];
+				if (last == -1) {
+					last = h.first;
+					currentTint += h.second.first;
+				} else {
+					if (currentTint >= T) {
+						count += (abs(last - h.first)) * (abs(x - tintsX[i+1].first));
+					}
+					last = h.first;
+					currentTint += h.second.first; 
+				}
+			}
+		}
+	}
+	cout << count << endl;
+	return 0;
 }
