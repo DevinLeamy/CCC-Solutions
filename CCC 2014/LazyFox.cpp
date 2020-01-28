@@ -50,13 +50,6 @@ int main() {
 			}
 		}
 	}
-//	loop(distances.size()) {
-//		int xi = distances[i].second.first.first;
-//		int yi = distances[i].second.first.second;
-//		int xf = distances[i].second.second.first;
-//		int yf = distances[i].second.second.second;
-//		cout << xi << " " << yi << " " << xf << " " << yf << " Best:" << best[i] << endl;
-//	}
 	cout << currentBest << endl;
 	return 0;
 }
