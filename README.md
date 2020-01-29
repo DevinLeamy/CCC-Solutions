@@ -28,7 +28,7 @@ A collection of unoffical CCC solutions from various years of the competition
 
  # CCC 2012
  
-  Junior 1: (0/15)      Senior 1: (15/15)
+  Junior 1: (15/15)      Senior 1: (15/15)
   
   Junior 2: (15/15)     Senior 2: (15/15)
   
