@@ -72,7 +72,7 @@ A collection of unoffical CCC solutions from various years of the competition
   
   Junior 4: (15/15)     Senior 4: (13/15)
   
-  Junior 5: (13/15)     Senior 5: Null
+  Junior 5: (15/15)     Senior 5: Null
   
  # CCC 2016
  
