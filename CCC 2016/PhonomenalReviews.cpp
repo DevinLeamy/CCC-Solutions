@@ -1,5 +1,3 @@
-// 13/15 TLE
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -17,11 +15,21 @@
 using namespace std;
 bool isPho[100001];
 bool visited[100001];
+int depth[100001] = {-1};
+int longestPath = -1;
+void getLongestPath(int current, vector<vector<int>> &adj, int last, int currentDepth) {
+	depth[current] = currentDepth;
+	longestPath = max(longestPath, depth[current]);
+	for (int i = 0; i < adj[current].size(); i++) {
+		if (adj[current][i] == last) {continue;}
+		getLongestPath(adj[current][i], adj, current, currentDepth+1);
+	}
+}
 int main() {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	int N, M, m, a, b; int treeWeight = 0; cin >> N >> M;
+	int N, M, m, a, b; int treeWeight = 0; int pho = 0; cin >> N >> M;
 	vector<vector<int>> adjOne(N+1);
-	loop(M) {cin >> m; isPho[m] = true; }
+	loop(M) {cin >> m; isPho[m] = true; pho = m;}
 	loop(N-1) {
 		cin >> a >> b;
 		adjOne[a].pb(b); adjOne[b].pb(a);
@@ -36,20 +44,9 @@ int main() {
 			current = node;
 		}
 	}
-	loop(N) {if (adjOne[i].size() == 1) {adjOne[N].pb(i);}}
 	for (int i = 0; i < N; i++) {treeWeight += adjOne[i].size();}
-	int longestPath = 0;
-	queue<pair<int, PI>> current; current.push({N, {-1, -1}}); // currentNode, path, lastNode
-	while (!current.empty()) {
-		pair<int, PI> curNode = current.front(); current.pop();
-		int node = curNode.first; int path = curNode.second.first;
-		longestPath = max(longestPath, path);
-		for (int ne : adjOne[node]) {
-			if (ne != curNode.second.second) {
-				current.push({ne, {path+1, node}});
-			}
-		}
-	}
+	getLongestPath(pho, adjOne, -1, 0);
+	for (int j = 0; j < N; j++) { if (depth[j] == longestPath) { getLongestPath(j, adjOne, -1, 0); break; } }
 	treeWeight -= longestPath;
 	cout << treeWeight << endl;
 	return 0;
