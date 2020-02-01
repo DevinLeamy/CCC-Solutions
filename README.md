@@ -1,6 +1,6 @@
 # CCC-Solutions
 
-A collection of unoffical CCC solutions from various years of the competition
+A collection of unoffical CCC solutions from various years of the competition. The scores posted are the scores my solutions were given from the CCC online grader. 
 
  # CCC 2010
  
