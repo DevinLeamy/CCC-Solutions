@@ -21,14 +21,11 @@ int swaps(int a, int b) {
 int main() {
 	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	string s; cin >> s;
-	vector<string> per = {"ACB", "ABC", "BCA", "BAC", "CAB", "CBA"};
 	int as = 0;
 	int bs = 0;
-	int cs = 0;
 	for (int i = 0; i < s.length(); i++) {
 		if (s[i] == 'A') { as++; }
 		else if (s[i] == 'B') { bs++; }
-		else { cs++; }
 	}
 	int aLp = 0;
 	int aRp = as-1;
