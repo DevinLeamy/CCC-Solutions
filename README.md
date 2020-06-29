@@ -120,3 +120,15 @@ A collection of unofficial CCC solutions from various years of the competition. 
   Junior 4: (15/15)     Senior 4: Null
   
   Junior 5: (14/15)     Senior 5: Null
+ 
+ # CCC 2020
+ 
+  Junior 1: Null       Senior 1: (15/15) 
+  
+  Junior 2: Null       Senior 2: (15/15)
+  
+  Junior 3: Null       Senior 3: (15/15)
+  
+  Junior 4: Null       Senior 4: (15/15)
+  
+  Junior 5: Null       Senior 5: Null
