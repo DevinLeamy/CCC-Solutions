@@ -11,13 +11,10 @@ int main() {
         int f = first_vals / 10;
         int s = first_vals % 10;
         string dir;
-        if ((f + s) % 2 == 1) {
-            dir = "left";
-        } else if ((f + s) % 2 == 0) {
-            dir = "right";
-        } else {
-            dir = last_dir;
-        }
+        if ((f + s) % 2 == 1) { dir = "left"; } 
+        else if ((f + s) % 2 == 0 && f + s != 0) { dir = "right"; } 
+        else { dir = last_dir; }
+
         cout << dir << " " << rem_vals << endl;
         cin >> ins;
         last_dir = dir;

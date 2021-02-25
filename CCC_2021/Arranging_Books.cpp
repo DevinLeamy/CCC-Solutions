@@ -16,20 +16,17 @@ int main() {
         else if (i >= large && i < large + med) { desired += "M"; } 
         else { desired += "S"; } 
     }
-    int sl = 0, lg = 0; 
+    int sl = 0, lg = 0, md = 0;
     for (int i = 0; i < large; i++) {
         if (books[i] == desired[i]) continue;
         if (books[i] == 'S') { sl++; }
+        if (books[i] == 'M') { md++; }
     }
-    for (int i = books.length() - 1; i >= books.length() - sl; i--) {
+    for (int i = books.length() - sml; i < books.length(); i++) {
         if (books[i] == desired[i]) continue; 
         if (books[i] == 'L') { lg++; }
+        if (books[i] == 'M') { md++; }
     }
-    int total_swaps = min(lg, sl) + max(lg, sl) - min(lg, sl);
-    int rem_swaps = 0;
-    for (int i = large; i < books.length() - sml; i++) {
-        if (books[i] != desired[i]) rem_swaps++;
-    }
-    total_swaps += rem_swaps;
+    int total_swaps = min(lg, sl) + max(lg, sl) - min(lg, sl) + md;
     cout << total_swaps << endl;
 }
