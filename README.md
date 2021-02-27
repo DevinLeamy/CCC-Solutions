@@ -98,7 +98,7 @@ Posted scores were achieved either on the CCC Online Grader or DMOJ.
 + Junior 1: (15/15)     Senior 1: (15/15) 
 + Junior 2: (15/15)     Senior 2: (15/15)
 + Junior 3: (15/15)     Senior 3: (15/15) 
-+ Junior 4: (15/15)     Senior 4: Null 
++ Junior 4: (15/15)     Senior 4: (15/15) 
 + Junior 5: (15/15)     Senior 5: Null
 
 
