@@ -2,7 +2,7 @@
 
 A collection of unofficial CCC solutions. <br/>
 </br>
-Posted scores were achieved either on the CCC Online Grader or DMOJ.
+Posted scores were achieved on the CCC Online Grader.
 
 <!-- A collection of unofficial CCC solutions from various years of the competition. The scores posted are the scores my solutions were given from the CCC online grader. Like many young Canadian programmers, I wanted to do well on Waterloo's annual Computing Competition to showcase my problem solving skills. My natural first step to being preparing was to take on the problems from the previous years. Having just gotten into competitive programming, I quickly realized that some of the problems were far beyond my ability and as a result I found myself looking for solutions online. It was this long and tedious process of looking for solutions online that drove me to create this repository. After few months and many more problems solved, I have created this nearly complete collection of CCC solutions. I hope this proves to be helpful! -->
  # CCC 2010
